@@ -253,6 +253,7 @@ func (p *Parser) parseMenuDirective(entry *MenuEntry, line string) {
 	case "initrd":
 		entry.Initrd = append(entry.Initrd, value)
 	case "options":
+		value = unquoteRefindValue(value)
 		entry.Options = value
 		entry.BootOptions = parseBootOptions(value)
 	case "disabled":
@@ -275,6 +276,7 @@ func (p *Parser) parseSubmenuDirective(submenu *SubmenuEntry, line string) {
 	case "initrd":
 		submenu.Initrd = append(submenu.Initrd, value)
 	case "options":
+		value = unquoteRefindValue(value)
 		submenu.Options = value
 		submenu.BootOptions = parseBootOptions(value)
 	case "add_options":

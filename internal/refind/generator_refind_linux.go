@@ -124,7 +124,7 @@ func (g *Generator) generateRefindLinuxConfWithAllEntries(originalContent string
 				snapshotTitle := fmt.Sprintf("%s (%s)", sourceEntry.Title, g.getSnapshotDisplayName(snapshot))
 				snapshotOptions := g.updateOptionsForSnapshot(sourceEntry.Options, snapshot)
 
-				snapshotLine := fmt.Sprintf("\"%s\" \"%s\"", snapshotTitle, snapshotOptions)
+				snapshotLine := fmt.Sprintf("%s %s", quoteRefindValue(snapshotTitle), quoteRefindValue(snapshotOptions))
 				lines = append(lines, snapshotLine)
 			}
 		}

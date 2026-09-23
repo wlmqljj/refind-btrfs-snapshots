@@ -104,7 +104,7 @@ func (g *Generator) generateTemplateEntry(sourceEntries []*MenuEntry, snapshots 
 			}
 
 			if sampleOptions != "" {
-				content.WriteString(fmt.Sprintf("    options  %s\n", sampleOptions))
+				content.WriteString(fmt.Sprintf("    options  %s\n", quoteRefindValue(sampleOptions)))
 			}
 			content.WriteString("    \n")
 			content.WriteString("    # Snapshot submenus will be automatically generated below:\n")
@@ -117,7 +117,7 @@ func (g *Generator) generateTemplateEntry(sourceEntries []*MenuEntry, snapshots 
 				content.WriteString(fmt.Sprintf("    submenuentry \"%s\" {\n", snapshotTitle))
 				if sampleOptions != "" {
 					snapshotOptions := g.updateOptionsForSnapshot(sampleOptions, snapshot)
-					content.WriteString(fmt.Sprintf("        options %s\n", snapshotOptions))
+					content.WriteString(fmt.Sprintf("        options %s\n", quoteRefindValue(snapshotOptions)))
 				}
 				content.WriteString("    }\n")
 			}
@@ -132,7 +132,7 @@ func (g *Generator) generateTemplateEntry(sourceEntries []*MenuEntry, snapshots 
 		content.WriteString("    loader   /boot/vmlinuz-linux\n")
 		content.WriteString("    initrd   /boot/initramfs-linux.img\n")
 		if sampleOptions != "" {
-			content.WriteString(fmt.Sprintf("    options  %s\n", sampleOptions))
+			content.WriteString(fmt.Sprintf("    options  %s\n", quoteRefindValue(sampleOptions)))
 		}
 		content.WriteString("    \n")
 		content.WriteString("    # Snapshot submenus will be automatically generated below:\n")
@@ -145,7 +145,7 @@ func (g *Generator) generateTemplateEntry(sourceEntries []*MenuEntry, snapshots 
 			content.WriteString(fmt.Sprintf("    submenuentry \"%s\" {\n", snapshotTitle))
 			if sampleOptions != "" {
 				snapshotOptions := g.updateOptionsForSnapshot(sampleOptions, snapshot)
-				content.WriteString(fmt.Sprintf("        options %s\n", snapshotOptions))
+				content.WriteString(fmt.Sprintf("        options %s\n", quoteRefindValue(snapshotOptions)))
 			}
 			content.WriteString("    }\n")
 		}
@@ -225,7 +225,7 @@ func (g *Generator) generateSingleMenuEntry(title string, templateEntry *MenuEnt
 		content.WriteString(fmt.Sprintf("    initrd %s\n", initrd))
 	}
 	if templateEntry.Options != "" {
-		content.WriteString(fmt.Sprintf("    options %s\n", templateEntry.Options))
+		content.WriteString(fmt.Sprintf("    options %s\n", quoteRefindValue(templateEntry.Options)))
 	}
 
 	for _, snapshot := range snapshots {
@@ -257,6 +257,6 @@ func (g *Generator) writeSplitSubmenuBody(content *strings.Builder, plan *kernel
 
 	snapshotOptions := g.updateOptionsForSnapshot(templateEntry.Options, snapshot)
 	if snapshotOptions != "" {
-		content.WriteString(fmt.Sprintf("        options %s\n", snapshotOptions))
+		content.WriteString(fmt.Sprintf("        options %s\n", quoteRefindValue(snapshotOptions)))
 	}
 }

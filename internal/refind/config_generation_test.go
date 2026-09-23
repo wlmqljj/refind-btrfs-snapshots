@@ -401,7 +401,7 @@ func TestGenerateSingleMenuEntry(t *testing.T) {
 	assert.Contains(t, content, "    icon /EFI/refind/icons/os_arch.png")
 	assert.Contains(t, content, "    loader /boot/vmlinuz-linux")
 	assert.Contains(t, content, "    initrd /boot/initramfs-linux.img")
-	assert.Contains(t, content, "    options quiet rw rootflags=subvol=@ root=UUID=test-uuid")
+	assert.Contains(t, content, "    options \"quiet rw rootflags=subvol=@ root=UUID=test-uuid\"")
 
 	// Should contain submenu for snapshot
 	assert.Contains(t, content, "    submenuentry \"Arch Linux (2025-06-12T07:00:18Z)\" {")
@@ -565,7 +565,7 @@ func TestGenerateSingleMenuEntry_MultipleInitrdDirectives(t *testing.T) {
 	initramfsIndex := strings.Index(content, "initrd /boot/initramfs-linux.img")
 	assert.True(t, ucodeIndex < initramfsIndex, "Microcode initrd should appear before main initramfs")
 
-	assert.Contains(t, content, "    options quiet rw rootflags=subvol=@ root=UUID=test-uuid")
+	assert.Contains(t, content, "    options \"quiet rw rootflags=subvol=@ root=UUID=test-uuid\"")
 
 	// Should contain submenu for snapshot
 	assert.Contains(t, content, "    submenuentry \"Arch Linux (2025-06-12T07:00:18Z)\" {")
